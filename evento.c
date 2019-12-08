@@ -61,7 +61,7 @@ void organizarEvento()
                 pal.local=Auditorio3;
             }
             salvaPalestra(&pal);
-            checarCPF(&pal,pal.cpf);
+            checarCPF(pal.cpf);
             break;
 
         case Cursos:
@@ -96,6 +96,8 @@ void organizarEvento()
             {
                 cursos.local=local;
             }
+            salvaCursos(cursos);
+            checarCPF(cursos.cpf);
             break;
 
         case Grupos:
@@ -130,7 +132,8 @@ void organizarEvento()
                {
                    evento->local=local;
                }*/
-
+            salvaGrupos(grupos);
+            checarCPF(grupos.cpf);
             break;
 
         case Oficinas:
@@ -165,6 +168,8 @@ void organizarEvento()
             {
                 oficinas.local=local;
             }
+            salvaGrupos(oficinas);
+            checarCPF(oficinas.cpf);
             break;
 
         }
@@ -175,7 +180,7 @@ void salvaPalestra(PALESTRA *dados)
 {
     FILE *fp;
     /*Abrir o Arquivo DADOS.DAT */
-    if ((fp = fopen("Palestra.dat","wb"))==NULL)
+    if ((fp = fopen("Palestra.dat","ab"))==NULL)
     {
         printf("Impossivel criar o arquivo %s\n","Palestra.dat");
         exit(1);
@@ -187,10 +192,65 @@ void salvaPalestra(PALESTRA *dados)
 }
 
 
-void checarCPF(PALESTRA *dados,char var)
+void salvaCursos(CURSO *dados)
 {
     FILE *fp;
-    int contPessoa=0;
+
+    /*Abrir o Arquivo DADOS.DAT */
+    if ((fp = fopen("Curso.dat","ab"))==NULL)
+    {
+        printf("Impossivel criar o arquivo %s\n","cursos.dat");
+        exit(1);
+    }
+
+    fwrite(&dados,sizeof(CURSO),1,fp); // int sera o nome da struct
+
+    fclose(fp);
+}
+
+void salvaGrupos(GRUPO *dados)
+{
+    FILE *fp;
+    int i;
+    /*Abrir o Arquivo DADOS.DAT */
+    if ((fp = fopen("Grupo.dat","ab"))==NULL)
+    {
+        printf("Impossivel criar o arquivo %s\n","grupos.dat");
+        exit(1);
+    }
+
+    fwrite(&dados,sizeof(GRUPO),1,fp); // int sera o nome da struct
+
+    fclose(fp);
+}
+
+salvaOficinas(OFICINA *dados)
+{
+    FILE *fp;
+
+    /*Abrir o Arquivo DADOS.DAT */
+    if ((fp = fopen("Oficinas.dat","ab"))==NULL)
+    {
+        printf("Impossivel criar o arquivo %s\n","oficinas.dat");
+        exit(1);
+    }
+
+    fwrite(&dados,sizeof(OFICINA),1,fp); // int sera o nome da struct
+
+    fclose(fp);
+}
+
+void checarCPF(char var)
+{
+    PALESTRA *dados1;
+    CURSO *dados2;
+    OFICINA *dados3;
+
+    FILE *fp;
+    int i=0;
+    int contPal=0;
+    int contCurso=0;
+    int contOfic=0;
 
     if((fp=fopen("Palestra.dat","rb"))==NULL)
     {
@@ -198,69 +258,68 @@ void checarCPF(PALESTRA *dados,char var)
     }
     else
     {
-             fseek(fp, sizeof(PALESTRA), SEEK_SET);
-                      printf("oi");
-                      system("pause");
-             while(fread(&dados, sizeof(PALESTRA),1, fp))
-                  {
+        //fseek(fp, sizeof(PALESTRA), SEEK_SET);
 
-                      if(dados->cpf==var)
-                      {
-                        contPessoa++;
-                        printf("%d",contPessoa);
-                        system("pause");
-                      }
-                  }
-
+        while(fread(&dados1, sizeof(PALESTRA),1, fp)==1)
+        {
+            if(dados1->cpf==var)
+            {
+                contPal++;
+            }
+        }
+        if (contPal>=1)
+        {
+            printf("Palestrante ja cadastrado em %d palestra...\n",contPal);
+        }
+        close(fp);
     }
-
-}
-
-void salvaCursos(ENCEC *cursos, int capacidade)
-{
-    FILE *fp;
-
-    /*Abrir o Arquivo DADOS.DAT */
-    if ((fp = fopen("cursos.dat","ab"))==NULL)
+//Testando se o palestrante esta inscrito em algum curso
+    if((fp=fopen("Curso.dat","rb"))==NULL)
     {
-        printf("Impossivel criar o arquivo %s\n","cursos.dat");
-        exit(1);
+        printf("Impossivel ler o arquivo %s\n","Palestra.dat");
     }
-
-    fwrite(&cursos,sizeof(ENCEC),1,fp); // int sera o nome da struct
-
-    fclose(fp);
-}
-
-void salvaGrupos(ENCEC *grupos, int capacidade)
-{
-    FILE *fp;
-    int i;
-    /*Abrir o Arquivo DADOS.DAT */
-    if ((fp = fopen("grupos.dat","ab"))==NULL)
+    else
     {
-        printf("Impossivel criar o arquivo %s\n","grupos.dat");
-        exit(1);
+        //fseek(fp, sizeof(PALESTRA), SEEK_SET);
+
+        while(fread(&dados2, sizeof(CURSO),1, fp)==1)
+        {
+            if(dados2->cpf==var)
+            {
+                contCurso++;
+            }
+        }
+        if (contPal>=1)
+        {
+            printf("Palestrante ja cadastrado em %d curso(s)...",contCurso);
+        }
+        close(fp);
     }
-
-    fwrite(&grupos[i],sizeof(ENCEC),1,fp); // int sera o nome da struct
-
-    fclose(fp);
-}
-
-salvaOficinas(ENCEC *oficinas, int capacidade)
-{
-    FILE *fp;
-
-    /*Abrir o Arquivo DADOS.DAT */
-    if ((fp = fopen("oficinas.dat","ab"))==NULL)
+//Testando se o palestrante esta inscrito em alguma oficina
+    if((fp=fopen("Oficinas.dat","rb"))==NULL)
     {
-        printf("Impossivel criar o arquivo %s\n","oficinas.dat");
-        exit(1);
+        printf("Impossivel ler o arquivo %s\n","Oficinas.dat");
+    }
+    else
+    {
+        //fseek(fp, sizeof(PALESTRA), SEEK_SET);
+
+        while(fread(&dados3, sizeof(OFICINA),1, fp)==1)
+        {
+            if(dados3->cpf==var)
+            {
+                contOfic++;
+            }
+        }
+        if (contOfic>=1)
+        {
+            printf("Palestrante ja cadastrado em %d oficina(s)...",contOfic);
+        }
+        close(fp);
     }
 
-    fwrite(&oficinas,sizeof(ENCEC),1,fp); // int sera o nome da struct
 
-    fclose(fp);
+
 }
+
 

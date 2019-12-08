@@ -21,7 +21,8 @@ typedef struct
     char horario[tamNome];
     int cargaHoraria;
     int nParticipantes;
-    char local;
+    int capacidade;
+    int local;
 } CURSO;
 
 typedef struct
@@ -31,6 +32,7 @@ typedef struct
     char horario[tamNome];
     int cargaHoraria;
     int nParticipantes;
+    int capacidade;
     char local;
 } GRUPO;
 
@@ -41,9 +43,10 @@ typedef struct
     char horario[tamNome];
     int cargaHoraria;
     int nParticipantes;
+    int capacidade;
     char local;
 } OFICINA;
 
-void checarCPF(PALESTRA *dados,char var);
+void checarCPF(char var);
 
 #endif // ENCEC_HEADER

@@ -4,6 +4,9 @@ Esta funcao insere e conta o numero de participantes no Congresso
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
+#include <conio.h>
+#include <time.h>
 #include "ENCEC.h"
 #define capMax 150
 #define tamDoc 15
@@ -70,8 +73,8 @@ void encec()
     int editarParticipante=1;  //Verifica se sera inserido um novo participante
     int opcao=-1;
     int i;
-
-
+    system("color 9E");
+//    textcolor(128);
     while(opcao!=0)
     {
         system("cls");
@@ -466,3 +469,4 @@ void lerEMAIL(PESSOA *p)
     fgets(p->ende.email,tamNome*sizeof(char),stdin);
     strtok(p->ende.email,"\n");
 }
+
