@@ -5,7 +5,7 @@
 
 typedef struct
 {
-    char palestrante[tamNome];
+    char cpf[tamNome];
     char tema[tamNome];
     char horario[tamNome];
     int cargaHoraria;
@@ -16,7 +16,7 @@ typedef struct
 
 typedef struct
 {
-    char palestrante[tamNome];
+    char cpf[tamNome];
     char tema[tamNome];
     char horario[tamNome];
     int cargaHoraria;
@@ -26,7 +26,7 @@ typedef struct
 
 typedef struct
 {
-    char palestrante[tamNome];
+    char cpf[tamNome];
     char tema[tamNome];
     char horario[tamNome];
     int cargaHoraria;
@@ -36,7 +36,7 @@ typedef struct
 
 typedef struct
 {
-    char palestrante[tamNome];
+    char cpf[tamNome];
     char tema[tamNome];
     char horario[tamNome];
     int cargaHoraria;
@@ -44,6 +44,6 @@ typedef struct
     char local;
 } OFICINA;
 
-void salvaPalestra(PALESTRA *var);
+void checarCPF(PALESTRA *dados,char var);
 
 #endif // ENCEC_HEADER

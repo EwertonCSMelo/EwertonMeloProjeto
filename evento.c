@@ -25,10 +25,10 @@ void organizarEvento()
         case Palestra:
 
             system("cls");
-            printf("Digite o nome do palestrante:");
+            printf("Digite o CPF do palestrante:");
             setbuf(stdin,NULL);
-            fgets(pal.palestrante,tamNome*sizeof(char),stdin);
-            strtok(pal.palestrante,"\n");
+            fgets(pal.cpf,tamNome*sizeof(char),stdin);
+            strtok(pal.cpf,"\n");
 
             printf("Digite o tema da palestra:");
             setbuf(stdin,NULL);
@@ -61,14 +61,15 @@ void organizarEvento()
                 pal.local=Auditorio3;
             }
             salvaPalestra(&pal);
+            checarCPF(&pal,pal.cpf);
             break;
 
         case Cursos:
             system("cls");
-            printf("Digite o nome do mediador:");
+            printf("Digite o CPF do mediador:");
             setbuf(stdin,NULL);
-            fgets(cursos.palestrante,tamNome*sizeof(char),stdin);
-            strtok(cursos.palestrante,"\n");
+            fgets(cursos.cpf,tamNome*sizeof(char),stdin);
+            strtok(cursos.cpf,"\n");
 
             printf("Digite o tema do curso:");
             setbuf(stdin,NULL);
@@ -99,10 +100,10 @@ void organizarEvento()
 
         case Grupos:
             system("cls");
-            printf("Digite o nome do mediador:");
+            printf("Digite o CPF do mediador:");
             setbuf(stdin,NULL);
-            fgets(grupos.palestrante,tamNome*sizeof(char),stdin);
-            strtok(grupos.palestrante,"\n");
+            fgets(grupos.cpf,tamNome*sizeof(char),stdin);
+            strtok(grupos.cpf,"\n");
 
             printf("Digite o tema da discussao:");
             setbuf(stdin,NULL);
@@ -134,10 +135,10 @@ void organizarEvento()
 
         case Oficinas:
             system("cls");
-            printf("Digite o nome do mediador:");
+            printf("Digite o CPF do mediador:");
             setbuf(stdin,NULL);
-            fgets(oficinas.palestrante,tamNome*sizeof(char),stdin);
-            strtok(oficinas.palestrante,"\n");
+            fgets(oficinas.cpf,tamNome*sizeof(char),stdin);
+            strtok(oficinas.cpf,"\n");
 
             printf("Digite o tema da palestra:");
             setbuf(stdin,NULL);
@@ -170,39 +171,47 @@ void organizarEvento()
     }
 }
 
-void salvaPalestra(PALESTRA *var)
+void salvaPalestra(PALESTRA *dados)
 {
     FILE *fp;
-    int i;
     /*Abrir o Arquivo DADOS.DAT */
-    if ((fp = fopen("Palestra.dat","ab"))==NULL)
+    if ((fp = fopen("Palestra.dat","wb"))==NULL)
     {
         printf("Impossivel criar o arquivo %s\n","Palestra.dat");
         exit(1);
     }
 
-    fwrite(&var,sizeof(PALESTRA),1,fp); // int sera o nome da struct
+    fwrite(dados,sizeof(PALESTRA),1,fp); // int sera o nome da struct
 
     fclose(fp);
 }
 
 
-void checarPalestrante(PALESTRA *pessoa)
+void checarCPF(PALESTRA *dados,char var)
 {
     FILE *fp;
     int contPessoa=0;
 
     if((fp=fopen("Palestra.dat","rb"))==NULL)
     {
-        printf("Impossivel ler o arquivo %s\n","Palestrante.dat");
+        printf("Impossivel ler o arquivo %s\n","Palestra.dat");
     }
     else
     {
-        while(fread(&pessoa,sizeof(ENCEC),1,fp))
-        {
-            printf("Nome: %s CPF: %s \n",pessoa->nome,pessoa->cpf);
-            contPessoa++;
-        }
+             fseek(fp, sizeof(PALESTRA), SEEK_SET);
+                      printf("oi");
+                      system("pause");
+             while(fread(&dados, sizeof(PALESTRA),1, fp))
+                  {
+
+                      if(dados->cpf==var)
+                      {
+                        contPessoa++;
+                        printf("%d",contPessoa);
+                        system("pause");
+                      }
+                  }
+
     }
 
 }
@@ -210,7 +219,7 @@ void checarPalestrante(PALESTRA *pessoa)
 void salvaCursos(ENCEC *cursos, int capacidade)
 {
     FILE *fp;
-    int i;
+
     /*Abrir o Arquivo DADOS.DAT */
     if ((fp = fopen("cursos.dat","ab"))==NULL)
     {
@@ -218,7 +227,7 @@ void salvaCursos(ENCEC *cursos, int capacidade)
         exit(1);
     }
 
-    fwrite(&cursos[i],sizeof(ENCEC),1,fp); // int sera o nome da struct
+    fwrite(&cursos,sizeof(ENCEC),1,fp); // int sera o nome da struct
 
     fclose(fp);
 }
@@ -242,7 +251,7 @@ void salvaGrupos(ENCEC *grupos, int capacidade)
 salvaOficinas(ENCEC *oficinas, int capacidade)
 {
     FILE *fp;
-    int i;
+
     /*Abrir o Arquivo DADOS.DAT */
     if ((fp = fopen("oficinas.dat","ab"))==NULL)
     {
@@ -250,7 +259,8 @@ salvaOficinas(ENCEC *oficinas, int capacidade)
         exit(1);
     }
 
-    fwrite(&oficinas[i],sizeof(ENCEC),1,fp); // int sera o nome da struct
+    fwrite(&oficinas,sizeof(ENCEC),1,fp); // int sera o nome da struct
 
     fclose(fp);
 }
+

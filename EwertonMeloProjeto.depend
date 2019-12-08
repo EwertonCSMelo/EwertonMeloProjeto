@@ -24,24 +24,18 @@
 	<string.h>
 	"ENCEC.h"
 
-1575802283 source:c:\users\ewert\documents\sonny\computação20192\ewertonmeloprojeto\evento.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"ENCEC.h"
-	"evento.h"
-
 1575794717 source:c:\users\ewert\documents\sonny\computação20192\ewertonmeloprojeto\palestrantes.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"ENCEC.h"
 
-1575638252 c:\users\ewert\documents\sonny\computação20192\ewertonmeloprojeto\encec.c
+1575831828 source:c:\users\ewert\documents\sonny\computação20192\ewertonmeloprojeto\evento.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"ENCEC.h"
+	"evento.h"
 
-1575802207 c:\users\ewert\documents\sonny\computação20192\ewertonmeloprojeto\evento.h
+1575816412 c:\users\ewert\documents\sonny\computação20192\ewertonmeloprojeto\evento.h
 
