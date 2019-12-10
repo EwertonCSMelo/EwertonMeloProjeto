@@ -21,46 +21,7 @@ void liberaMemoria(ENCEC *p,int numCongressistas)
     free(p);
 }*/
 
-/*void printArq(ENCEC *pessoa, int numCongressistas)
-{
-    FILE *fp;
-    int i;
-    //Abrir o Arquivo DADOS.DAT
-    if ((fp = fopen("DADOS.DAT","wb"))==NULL)
-    {
-        printf("Impossivel criar o arquivo %s\n","DADOS.DAT");
-        exit(1);
-    }
 
-    for (i=0; i<numCongressistas; i++)
-    {
-        fwrite(&pessoa[i],sizeof(ENCEC),1,fp); // int sera o nome da struct
-    }
-
-    fclose(fp);
-}
-*/
-/*void lerArqBin(PESSOA *pessoa, int numCongressistas)
-{
-
-    FILE *fp;
-    int contPessoa;
-    contPessoa=numCongressistas;
-    if((fp=fopen("DADOS.DAT","ab"))==NULL)
-    {
-        printf("Impossivel ler o arquivo %s\n","DADOS.DAT");
-    }
-    else
-    {
-        while(fread(&pessoa[contPessoa],sizeof(ENCEC),1,fp))
-        {
-            printf("Nome: %s CPF: %s \n",pessoa[contPessoa].nome,pessoa[contPessoa].cpf);
-            contPessoa++;
-        }
-    }
-
-}
-*/
 void encec()
 {
     PESSOA participante[10];  //Definindo a variavel dado como tipo dados pessoais
@@ -74,12 +35,13 @@ void encec()
     int opcao=-1;
     int i;
     system("color 9E");
+    HideCursor();
 //    textcolor(128);
     while(opcao!=0)
     {
         system("cls");
-        printf("(1)Editar participantes  (2)Editar Evento  (0)Sair \n");
-        printf("Opcao: ");
+        printf(" \n (1)Editar participantes \n (2)Editar Evento \n (0)Sair \n");
+        printf(" Opcao: ");
         scanf("%d",&opcao);
         switch(opcao)
         {
@@ -113,12 +75,15 @@ void encec()
                     {
                     case 1:
                         acrescentarCongressista(&participante[contaParticipante++]);
+                        salvaCongressista(&participante[contaParticipante]);
                         break;
                     case 2:
                         acrescentarPalestrante(&palestrante[contaPalestrante++]);
+                        salvaPalestrante(&palestrante[contaPalestrante]);
                         break;
                     case 3:
                         acrescentarOrganizador(&organizador[contaOrganizador++]);
+                        salvaOrganizadores(&organizador[contaOrganizador]);
                         break;
                     case 4:
                         mostrarDados(&participante,contaParticipante);
@@ -171,21 +136,18 @@ void editarDados(PESSOA *p, int np)
     fgets(CPF,tamDoc*sizeof(char),stdin);
     strtok(CPF,"\n");
 
+
     for(i=0; strcmp(CPF, p[i].cpf)!=0&&i<np; i++)
     {
         system("cls");
         printf("procurando.");
+        Sleep(600);
         system("cls");
         printf("procurando..");
         system("cls");
         printf("procurando...");
         system("cls");
-        printf("procurando....");
-        system("cls");
-        printf("procurando.....");
-        system("cls");
-        printf("procurando......");
-        system("cls");
+        Sleep(600);
     }
 
     if (strcmp(CPF, p[i].cpf)!=0)
@@ -266,7 +228,7 @@ void editarDados(PESSOA *p, int np)
             case 12:
                 lerEMAIL(p);
                 break;
-           }
+            }
         }
     }
 }
@@ -313,6 +275,7 @@ void mostrarDados(PESSOA *p, int np)
 
         printf("EMAIL: ");
         printf("%s\n",p[i].ende.email);
+        printf("\n\n --------------------------------------- \n\n");
     }
     system("pause");
 }
@@ -470,3 +433,52 @@ void lerEMAIL(PESSOA *p)
     strtok(p->ende.email,"\n");
 }
 
+void HideCursor()
+{
+    CONSOLE_CURSOR_INFO cursor = {1, FALSE};
+    SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor);
+}
+
+void salvaCongressista(PESSOA *dados)
+{
+    FILE *fp;
+    /*Abrir o Arquivo DADOS.DAT */
+    if ((fp = fopen("Congressista.dat","ab"))==NULL)
+    {
+        printf("Impossivel criar o arquivo %s\n","Palestra.dat");
+        exit(1);
+    }
+
+    fwrite(dados,sizeof(PESSOA),1,fp); // int sera o nome da struct
+
+    fclose(fp);
+}
+
+void salvaPalestrante(PESSOA *dados)
+{
+    FILE *fp;
+    /*Abrir o Arquivo DADOS.DAT */
+    if ((fp = fopen("Palestrante.dat","ab"))==NULL)
+    {
+        printf("Impossivel criar o arquivo %s\n","Palestra.dat");
+        exit(1);
+    }
+
+    fwrite(dados,sizeof(PESSOA),1,fp); // int sera o nome da struct
+
+    fclose(fp);
+}
+void salvaOrganizadores(PESSOA *dados)
+{
+    FILE *fp;
+    /*Abrir o Arquivo DADOS.DAT */
+    if ((fp = fopen("Organizadores.dat","ab"))==NULL)
+    {
+        printf("Impossivel criar o arquivo %s\n","Palestra.dat");
+        exit(1);
+    }
+
+    fwrite(dados,sizeof(PESSOA),1,fp); // int sera o nome da struct
+
+    fclose(fp);
+}

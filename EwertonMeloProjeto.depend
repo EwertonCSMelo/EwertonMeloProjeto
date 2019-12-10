@@ -5,17 +5,21 @@
 	<string.h>
 	"ENCEC.h"
 
-1575799894 c:\users\ewert\documents\sonny\computação20192\ewertonmeloprojeto\encec.h
+1575919415 c:\users\ewert\documents\sonny\computação20192\ewertonmeloprojeto\encec.h
 
-1575796662 source:c:\users\ewert\documents\sonny\computação20192\ewertonmeloprojeto\encec.c
+1575938020 source:c:\users\ewert\documents\sonny\computação20192\ewertonmeloprojeto\encec.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<windows.h>
+	<conio.h>
+	<time.h>
 	"ENCEC.h"
 
-1575794717 source:c:\users\ewert\documents\sonny\computação20192\ewertonmeloprojeto\main.c
+1575928147 source:c:\users\ewert\documents\sonny\computação20192\ewertonmeloprojeto\main.c
 	<stdio.h>
 	<stdlib.h>
+	<conio.h>
 	"ENCEC.h"
 
 1575794717 source:c:\users\ewert\documents\sonny\computação20192\ewertonmeloprojeto\organizadores.c
@@ -30,12 +34,14 @@
 	<string.h>
 	"ENCEC.h"
 
-1575840195 source:c:\users\ewert\documents\sonny\computação20192\ewertonmeloprojeto\evento.c
+1575927634 source:c:\users\ewert\documents\sonny\computação20192\ewertonmeloprojeto\evento.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"ENCEC.h"
 	"evento.h"
 
-1575840652 c:\users\ewert\documents\sonny\computação20192\ewertonmeloprojeto\evento.h
+1575927501 c:\users\ewert\documents\sonny\computação20192\ewertonmeloprojeto\evento.h
+	<time.h>
+	<windows.h>
 
