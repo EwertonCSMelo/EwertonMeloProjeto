@@ -592,6 +592,7 @@ void printPalestra(PALESTRA *dados, int numPart)
     {
         while(fread(&dados[numPart],sizeof(PALESTRA),1,fp)==1)
         {
+            system("cls");
             cabecalho();
             printf("\n\n");
             printf("\t\t\t\t\CPF: %s\n",dados[numPart].cpf);
