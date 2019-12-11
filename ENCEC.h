@@ -75,5 +75,6 @@ void lerArqBin();
 void printArq(ENCEC *pessoa, int numCongressistas);
 void organizarEvento();
 void HideCursor();
+void cabecalho();
 #endif // ENCEC_HEADER
 

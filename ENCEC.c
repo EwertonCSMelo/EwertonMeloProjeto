@@ -7,6 +7,7 @@ Esta funcao insere e conta o numero de participantes no Congresso
 #include <windows.h>
 #include <conio.h>
 #include <time.h>
+#include <locale.h>
 #include "ENCEC.h"
 #define capMax 150
 #define tamDoc 15
@@ -36,12 +37,19 @@ void encec()
     int i;
     system("color 9E");
     HideCursor();
+
+
 //    textcolor(128);
     while(opcao!=0)
     {
+        setlocale(LC_ALL,"");
         system("cls");
-        printf(" \n (1)Editar participantes \n (2)Editar Evento \n (0)Sair \n");
-        printf(" Opcao: ");
+        cabecalho();
+        printf("\n\n\n\n");
+        printf("\t\t\t\t\t(1)Editar participantes\n");
+        printf("\t\t\t\t\t(2)Editar Evento \n");
+        printf("\t\t\t\t\t(0)Sair \n");
+        printf("\t\t\t\t\t Opcao: ");
         scanf("%d",&opcao);
         switch(opcao)
         {
@@ -51,21 +59,23 @@ void encec()
             while (editarParticipante!=0) //Laco responsavel pelo acrescimo e contagem de pessoas no evento
             {
                 system("cls");
-                printf("(1) Acrescentar Congressista\n");
-                printf("(2) Acrescentar Palestrante\n");
-                printf("(3) Acrescentar Organizadores\n");
-                printf("(4) Mostrar Congressista\n");
-                printf("(5) Mostrar Palestrante\n");
-                printf("(6) Mostrar Organizadores\n");
-                printf("(7) Editar Congressista\n");
-                printf("(8) Editar Palestrante\n");
-                printf("(9) Editar Organizadores\n");
-                printf("(10) Remover Congressista\n");
+                cabecalho();
+                printf("\n\n\n");
+                printf("\t\t\t\t\t(1) Acrescentar Congressista\n");
+                printf("\t\t\t\t\t(2) Acrescentar Palestrante\n");
+                printf("\t\t\t\t\t(3) Acrescentar Organizadores\n");
+                printf("\t\t\t\t\t(4) Mostrar Congressista\n");
+                printf("\t\t\t\t\t(5) Mostrar Palestrante\n");
+                printf("\t\t\t\t\t(6) Mostrar Organizadores\n");
+                printf("\t\t\t\t\t(7) Editar Congressista\n");
+                printf("\t\t\t\t\t(8) Editar Palestrante\n");
+                printf("\t\t\t\t\t(9) Editar Organizadores\n");
+                printf("\t\t\t\t\t(10) Remover Congressista\n");
 
 
-                printf("(0) Sair do menu\n\n\n");
+                printf("\t\t\t\t\t(0) Sair do menu\n\n\n");
 
-                printf("Escolha uma opcao: ");
+                printf("\t\t\t\t\tEscolha uma opcao: ");
                 scanf("%d",&editarParticipante);
 
                 if (editarParticipante!=0)
@@ -137,7 +147,7 @@ void editarDados(PESSOA *p, int np)
     strtok(CPF,"\n");
 
 
-    for(i=0; strcmp(CPF, p[i].cpf)!=0&&i<np; i++)
+    for(i=0; i<np; i++)
     {
         system("cls");
         printf("procurando.");
@@ -148,86 +158,95 @@ void editarDados(PESSOA *p, int np)
         printf("procurando...");
         system("cls");
         Sleep(600);
+        if(strcmp(CPF, p[i].cpf)==0)
+        {
+            encontrado=1;
+        }
     }
 
-    if (strcmp(CPF, p[i].cpf)!=0)
+    if (encontrado==0)
     {
         printf("Participante nao encontrado!!!\n\n\n");
         system ("pause");
     }
     //   printDados(&p[i].contato);
-    while (opcao!=0)
+    if (encontrado==1)
     {
-        system("cls");
-        printf("\t\tEscolha uma opcao: \n\n\n");
-        printf("\t\t(1) Alterar Nome\n");
-        printf("\t\t(2) Alterar CPF\n");
-        printf("\t\t(3) Alterar Identidade\n");
-        printf("\t\t(4) Alterar rua\n");
-        printf("\t\t(5) Alterar bairro\n");
-        printf("\t\t(6) Alterar cidade\n");
-        printf("\t\t(7) Alterar estado\n");
-        printf("\t\t(8) Alterar pais\n");
-        printf("\t\t(9) Alterar cep\n");
-        printf("\t\t(10) Alterar numero\n");
-        printf("\t\t(11) Alterar Numero do Celular\n");
-        printf("\t\t(12) Alterar Email\n");
-        printf("\t\t(0) Voltar para o programa\n");
-        printf("\n\n");
-        printf("\t\t Opcao: ");
-        scanf("%d",&opcao);
-
-        if(opcao!=0)
+        while (opcao!=0)
         {
-            switch(opcao)
+            system("cls");
+            cabecalho();
+            printf("\n\n\n");
+            printf("\t\t\t\t\t Escolha uma opcao: \n\n\n");
+            printf("\t\t\t\t\t(1) Alterar Nome\n");
+            printf("\t\t\t\t\t(2) Alterar CPF\n");
+            printf("\t\t\t\t\t(3) Alterar Identidade\n");
+            printf("\t\t\t\t\t(4) Alterar rua\n");
+            printf("\t\t\t\t\t(5) Alterar bairro\n");
+            printf("\t\t\t\t\t(6) Alterar cidade\n");
+            printf("\t\t\t\t\t(7) Alterar estado\n");
+            printf("\t\t\t\t\t(8) Alterar pais\n");
+            printf("\t\t\t\t\t(9) Alterar cep\n");
+            printf("\t\t\t\t\t(10) Alterar numero\n");
+            printf("\t\t\t\t\t(11) Alterar Numero do Celular\n");
+            printf("\t\t\t\t\t(12) Alterar Email\n");
+            printf("\t\t\t\t\t(0) Voltar para o programa\n");
+            printf("\n");
+            printf("\t\t\t\t\tOpcao: ");
+            scanf("%d",&opcao);
+
+            if(opcao!=0)
             {
-            case 1:
-                lerNome(p);
-                break;
+                switch(opcao)
+                {
+                case 1:
+                    lerNome(p);
+                    break;
 
-            case 2:
-                lerCPF(p);
-                break;
+                case 2:
+                    lerCPF(p);
+                    break;
 
-            case 3:
-                lerIdentidade(p);
-                break;
+                case 3:
+                    lerIdentidade(p);
+                    break;
 
-            case 4:
-                lerRua(p);
-                break;
+                case 4:
+                    lerRua(p);
+                    break;
 
-            case 5:
-                lerNumero(p);
-                break;
+                case 5:
+                    lerNumero(p);
+                    break;
 
-            case 6:
-                lerBairro(p);
-                break;
+                case 6:
+                    lerBairro(p);
+                    break;
 
-            case 7:
-                lerCidade(p);
-                break;
+                case 7:
+                    lerCidade(p);
+                    break;
 
-            case 8:
-                lerEstado(p);
-                break;
+                case 8:
+                    lerEstado(p);
+                    break;
 
-            case 9:
-                lerPais(p);
-                break;
+                case 9:
+                    lerPais(p);
+                    break;
 
-            case 10:
-                lerCEP(p);
-                break;
+                case 10:
+                    lerCEP(p);
+                    break;
 
-            case 11:
-                lerNumCelular(p);
-                break;
+                case 11:
+                    lerNumCelular(p);
+                    break;
 
-            case 12:
-                lerEMAIL(p);
-                break;
+                case 12:
+                    lerEMAIL(p);
+                    break;
+                }
             }
         }
     }
@@ -241,7 +260,7 @@ void mostrarDados(PESSOA *p, int np)
     for (i=0; i<np; i++)
     {
         printf("Nome: ");
-        printf("%s\n", p[i].nome);
+        printf("%s\n", strupr(p[i].nome));
 
         printf("CPF: ");
         printf("%s\n",p[i].cpf);
@@ -250,19 +269,19 @@ void mostrarDados(PESSOA *p, int np)
         printf("%s\n",p[i].id);
 
         printf("Rua: ");
-        printf("%s\n",p[i].ende.rua);
+        printf("%s\n",strupr(p[i].ende.rua));
 
         printf("Numero: ");
         printf("%d\n",p[i].ende.numero);
 
         printf("Bairro: ");
-        printf("%s\n",p[i].ende.bairro);
+        printf("%s\n",strupr(p[i].ende.bairro));
 
         printf("Cidade: ");
-        printf("%s\n",p[i].ende.cidade);
+        printf("%s\n",strupr(p[i].ende.cidade));
 
         printf("Estado: ");
-        printf("%s\n",p[i].ende.estado);
+        printf("%s\n",strupr(p[i].ende.estado));
 
         printf("Pais: ");
         printf("%s\n",p[i].ende.pais);
@@ -482,3 +501,46 @@ void salvaOrganizadores(PESSOA *dados)
 
     fclose(fp);
 }
+
+void cabecalho()
+
+{
+    int i;
+    printf("\n\t ");
+    for (i=0; i<103; i++)
+    {
+        printf("_");
+    }
+    printf("\n");
+
+    printf("\t|");
+
+    for(i=0; i<103; i++)
+    {
+        printf(" ");
+    }
+    printf("|\n\t|");
+    for(i=0; i<103; i++)
+    {
+        printf(" ");
+    }
+    printf("|\n\t|");
+    printf("\t\t\t ENCONTRO CAMPINENSE DOS ESTUDANTES DE COMPUTAÇÃO - ENCEC\t\t\t|\n");
+    printf("\t|\t\t\t UNIVERSIDADE ESTADUAL DA PARAIBA - UEPB\t\t\t\t\t|\n");
+    printf("\t|\t\t\t LABORATORIO DE COMPUTAÇÃO I- LAB1\t\t\t\t\t\t|\n");
+    printf("\t|");
+    for(i=0; i<103; i++)
+    {
+        printf(" ");
+    }
+    printf("|\n");
+
+    printf("\t|");
+    for(i=0; i<103; i++)
+    {
+        printf("_");
+    }
+    printf("|\n");
+}
+
+

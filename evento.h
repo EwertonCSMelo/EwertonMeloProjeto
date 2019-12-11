@@ -49,7 +49,6 @@ typedef struct
     char horario[tamNome];
     int cargaHoraria;
     int nParticipantes;
-    int capacidade;
     char local;
 } GRUPO;
 
@@ -86,6 +85,22 @@ void salvaPalestra(PALESTRA *dados);
 void salvaCursos(CURSO *dados);
 void salvaGrupos(GRUPO *dados);
 char informaSala(int local);
-
+void printPalestra(PALESTRA *dados, int numPart);
+void printCursos(CURSO *dados, int numPart);
+void printGrupos(GRUPO *dados, int numPart);
+void printOficinas(OFICINA *dados, int numPart);
+void reSalvaPalestra(PALESTRA *dados);
+void reSalvaCursos(CURSO *dados);
+void reSalvaGrupos(GRUPO *dados);
+void reSalvaOficinas(OFICINA *dados);
+void editarPalestra(PALESTRA *dados, int numPart);
+void editarCursos(CURSO *dados, int numPart);
+void editarGrupos(GRUPO *dados, int numPart);
+void editarOficinas(GRUPO *dados, int numPart);
+void excluirPalestra(PALESTRA *dados, int numPart);
+void excluirCursos(CURSO *dados, int numPart);
+void excluirGrupos(GRUPO *dados, int numPart);
+void excluirOficinas(GRUPO *dados, int numPart);
+void abrirArquivos();
 
 #endif // ENCEC_HEADER
